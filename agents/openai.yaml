@@ -1,4 +1,4 @@
 interface:
-  display_name: "Spec to Ship 从需求到交付"
-  short_description: "视觉先行澄清需求、一次写完可恢复的分期文档，再由总指挥派子 agent 逐期施工到交付"
-  default_prompt: "Use $spec-to-ship to turn my idea into a traceable, phased specification, then act as the commander that dispatches subagents to build it phase by phase."
+  display_name: "包工头 · 从需求到交付"
+  short_description: "包工头带施工队：先和你把需求谈清、出图纸排工期，再派子 agent 逐期施工、监理把关、交付"
+  default_prompt: "Use $baogongtou to turn my idea into a traceable, phased specification, then act as the foreman (包工头) who dispatches subagent crews to build it phase by phase."

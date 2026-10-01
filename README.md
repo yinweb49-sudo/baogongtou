@@ -1,11 +1,23 @@
-# spec-to-ship
+# 包工头（baogongtou）
 
-> 原名 `requirements-writer`。从 v2 起，“写需求”和“按需求施工”合并成一个 skill：写和做本来就是一体的。
+> 曾用名 `requirements-writer`、`spec-to-ship`。从 v2 起，“写需求”和“按需求施工”合并成一个 skill：写和做本来就是一体的。
 
-一个**与项目解耦**、面向 vibe coding 的 Agent Skill，覆盖从需求到交付的全过程：
+一句话唤起：**“用包工头方式完成这套需求。”**
+
+一个**与项目解耦**、面向 vibe coding 的 Agent Skill，像装修一样把需求做到交付：包工头先和业主（你）把需求谈清楚、出图纸、排工期，先做样板间给你看，再派施工队一期一期施工，关键工序请监理把关，最后交付并留下交接单。
+
+| 工地角色 | 在本 skill 里是谁 |
+|---|---|
+| 业主 | 你 |
+| 包工头 | 主会话，最强档模型：谈需求、出图纸（需求文档）、排工期（期次）、派活、盯进度、跑手续（部署等线上操作）、写交接 |
+| 施工队 | 开发子 agent，主力档模型：按图纸施工 |
+| 监理 | 审查子 agent，最强档模型，只读：涉及钱等关键工序独立验收，有争议时仲裁 |
+| 验料员 | 核对子 agent，轻快档模型，只读，可选：开工前核对图纸和现场是否一致 |
+
+覆盖两个阶段：
 
 - **阶段一：需求编写**。帮普通用户或产品经理把业务结果说清楚；从无到有且有界面时，用可交互视觉原型建立沟通锚点；把复杂任务拆成工作量与上下文可控的 AI 执行单元，并按项目策略建立安全的代码恢复锚点。
-- **阶段二：总指挥施工**。由最强的模型当总指挥，派主力模型子 agent 一期一期把文档做成代码：排批次、查实关键事实后写任务书、收汇报、把技术问题翻成业务话问你、安排并行、对涉及钱的期次做独立审查、亲自完成部署和后台录入等线上操作（不可撤回和花钱的先问你），每轮结束留下交接记录，新窗口可以无缝接手。
+- **阶段二：包工头施工**。由最强的模型当包工头，派主力模型子 agent 一期一期把文档做成代码：排批次、查实关键事实后写任务书、收汇报、把技术问题翻成业务话问你、安排并行、对涉及钱的期次做独立审查、亲自完成部署和后台录入等线上操作（不可撤回和花钱的先问你），每轮结束留下交接记录，新窗口可以无缝接手。
 
 以前写好的分期文档要交给人一期期粘贴到新窗口里，效率低，也容易走样。现在写完就由 AI 自己带队做完，执行标准和文档标准是同一套。
 
@@ -15,9 +27,9 @@ Skill 会按风险选择轻量、标准或审计模式，把用户原话、代�
 
 ## 适配对象
 
-需求编写部分适用于任何能加载 Agent Skill 的工具。总指挥施工部分需要工具支持**子 agent 并能给子 agent 指定模型**，目前适配：
+需求编写部分适用于任何能加载 Agent Skill 的工具。包工头施工部分需要工具支持**子 agent 并能给子 agent 指定模型**，目前适配：
 
-| 工具 | 总指挥 / 审查顾问（T1 前沿档） | 开发（T2 主力档） | 轻量核对（T3 轻快档，可选） | 子 agent 指定模型的方式 |
+| 工具 | 包工头 / 监理（T1 前沿档） | 施工队（T2 主力档） | 验料员（T3 轻快档，可选） | 子 agent 指定模型的方式 |
 |---|---|---|---|---|
 | **Claude Code** | Opus | Sonnet | Haiku | 派活时写系列别名（`opus` / `sonnet` / `haiku`），自动对应最新一代 |
 | **OpenAI Codex** | Astra | Sol | Luna | 项目 `.codex/agents/` 下的角色文件（本仓库 `templates/codex-agents/` 提供），开工时按系列名填入当前最新型号 |
@@ -31,7 +43,7 @@ skill 里只写**模型系列名，不写版本号**：版本号会随模型升�
 ## 目录结构
 
 ```text
-spec-to-ship/
+baogongtou/
 ├── SKILL.md                              # skill 主文件：两阶段路由、方法论、工作流
 ├── agents/
 │   └── openai.yaml                       # Codex 界面里的显示名称与默认提示
@@ -42,17 +54,17 @@ spec-to-ship/
 │   ├── phase-prompt-template.md          # 分期开发提示词模板（含施工指挥基线、单期施工安排）
 │   ├── phase-workload-planning.md        # AI 工作量评分、上下文边界与动态拆期
 │   ├── git-backup-workflow.md            # 代码检查点、远端授权边界与业务回退说明
-│   ├── commander-workflow.md             # 【阶段二】总指挥每期循环、并行、审查、沟通、轮次交接
+│   ├── foreman-workflow.md             # 【阶段二】包工头每期循环、并行、审查、沟通、轮次交接
 │   ├── model-roles.md                    # 【阶段二】角色分级、模型系列对照、工具差异
 │   ├── dispatch-brief-template.md        # 【阶段二】开发 / 只读核对 / 审查 / 仲裁任务书模板
-│   ├── commander-handoff-template.md     # 【阶段二】总指挥工作记录与新总指挥开场提示词模板
-│   ├── review-checklist.md               # 需求 / 提示词 / 总指挥施工评审清单
+│   ├── foreman-handoff-template.md     # 【阶段二】包工头工作记录与新包工头开场提示词模板
+│   ├── review-checklist.md               # 需求 / 提示词 / 包工头施工评审清单
 │   └── project-profile-template.md       # 【新项目填这个】项目档案空白模板
 ├── templates/
 │   └── codex-agents/                     # Codex 角色文件，复制到项目 .codex/agents/
-│       ├── s2s_developer.toml            #   开发 → Sol 系列
-│       ├── s2s_reviewer.toml             #   审查顾问 → Astra 系列，只读
-│       └── s2s_checker.toml              #   轻量核对 → Luna 系列，只读
+│       ├── bgt_crew.toml            #   施工队 → Sol 系列
+│       ├── bgt_supervisor.toml             #   监理 → Astra 系列，只读
+│       └── bgt_checker.toml              #   验料员 → Luna 系列，只读
 └── examples/
     └── example-profile.md                # 一份填好的示例项目档案（虚构，供参考格式）
 ```
@@ -62,7 +74,7 @@ spec-to-ship/
 ### 通用引擎 + 项目档案
 
 - **通用引擎**（本仓库全部内容）：方法论和模板，不含任何具体项目的路径、术语、端口。
-- **项目档案**（`requirements-profile.md`，留在你自己的项目里；文件名沿用旧名，老项目无需改动）：一次性声明本项目的架构分层、数据库、鉴权 / 白名单、验收方式、结构检索工具、样本文档路径，以及总指挥施工的约定（开发工具、测试纪律、端口分配、红线操作执行人、必审范围）。
+- **项目档案**（`requirements-profile.md`，留在你自己的项目里；文件名沿用旧名，老项目无需改动）：一次性声明本项目的架构分层、数据库、鉴权 / 白名单、验收方式、结构检索工具、样本文档路径，以及包工头施工的约定（开发工具、测试纪律、端口分配、红线操作执行人、必审范围）。
 
 skill 运行时先读项目档案，把模板里的占位符（`{{前端}}`、`{{本地后端}}`、`{{云端后端}}`、`{{主库}}`、`{{次库}}`、`{{鉴权方案}}`、`{{白名单机制}}`、`{{验收方式}}`、`{{结构检索工具}}`）替换成真实值。**项目里不存在的层 / 库 / 机制会被自动裁剪掉，不会硬套三层架构。**
 
@@ -80,11 +92,11 @@ skill 运行时先读项目档案，把模板里的占位符（`{{前端}}`、`{
 - **Git 代码检查点**：按项目档案选择不保存、本地提交、本地标签或远程分支；远程存在不等于允许推送。阶段标签只恢复代码，不冒充数据库或外部状态回滚。
 - **敏感信息硬门槛**：真实密码、令牌、私钥和带口令连接串一律阻止进入 Git。
 
-### 阶段二：总指挥施工
+### 阶段二：包工头施工
 
-来自一个 30 余期真实项目的 6 轮施工记录，每条规则都有对应的事故或实测依据（详见 `references/commander-workflow.md`）。
+来自一个 30 余期真实项目的 6 轮施工记录，每条规则都有对应的事故或实测依据（详见 `references/foreman-workflow.md`）。
 
-- **总指挥只指挥**：最强模型负责规划、查实关键事实、派活、沟通和进度，不写代码、不重做验收；这样一个总指挥会话可连续带完 8–10 期。
+- **包工头只指挥**：最强模型负责规划、查实关键事实、派活、沟通和进度，不写代码、不重做验收；这样一个包工头会话可连续带完 8–10 期。
 - **批次与额度**：开工给出分批计划，停点选在完整的功能环节；你给了额度上限时，按实测消耗估算、超出就收缩、设刹车线。
 - **开工先查现场**：陌生提交、换电脑后的环境、期次文档与现状的差异；要你决定的事编号一次问清。
 - **标准任务书**：必读路径、范围与地盘、测试纪律、Git 纪律、红线、交付格式；只给路径不粘全文。
@@ -93,11 +105,11 @@ skill 运行时先读项目档案，把模板里的占位符（`{{前端}}`、`{
 - **先核对再施工**：文档写得早的期次，先核对文档与代码现状差异，以代码为准。
 - **拆两段派**：需要你拍板的期次先只读出清单，你确认后续派同一个子 agent 施工；子 agent 自己加的规则也交你拍板。
 - **并行看地盘**：同层同文件不并行；能并行时按目录划地盘，共用文档同一时间只一方写。
-- **钱相关必审**：涉及钱的期次做完派审查顾问独立审查（实战中两次各挖出 1 个高危问题，都是开发测试没覆盖的）；有争议的结论派审查顾问仲裁，不迁就任何一方。
-- **线上操作 AI 直接做**：部署、服务器配置、后台录入、复用已有配置由总指挥完成，不把命令甩给你；凭据用脚本读写、不打印、不交给子 agent。全量发版、花钱、动共用设施、不可撤回的删除先问你；被工具拦下时不绕过，请你切确认模式点允许。
+- **钱相关必审**：涉及钱的期次做完派监理独立审查（实战中两次各挖出 1 个高危问题，都是开发测试没覆盖的）；有争议的结论派监理仲裁，不迁就任何一方。
+- **线上操作 AI 直接做**：部署、服务器配置、后台录入、复用已有配置由包工头完成，不把命令甩给你；凭据用脚本读写、不打印、不交给子 agent。全量发版、花钱、动共用设施、不可撤回的删除先问你；被工具拦下时不绕过，请你切确认模式点允许。
 - **说人话**：先用具体例子讲清现状再给选项；改变已确认决定时用带数字的确认题锁口径。
 - **现场拆期**：执行中超出工作量，停在可验证边界拆出 `N b` 期。
-- **轮次交接**：上下文变重或换电脑时写《总指挥工作记录》，附新总指挥开场提示词，新窗口粘贴即可接手。
+- **轮次交接**：上下文变重或换电脑时写《包工头工作记录》，附新包工头开场提示词，新窗口粘贴即可接手。
 
 ## 安装
 
@@ -106,45 +118,47 @@ skill 运行时先读项目档案，把模板里的占位符（`{{前端}}`、`{
 用户级全局（所有项目可见）：
 
 ```bash
-git clone https://github.com/yinweb49-sudo/spec-to-ship.git ~/.claude/skills/spec-to-ship
+git clone https://github.com/yinweb49-sudo/baogongtou.git ~/.claude/skills/baogongtou
 ```
 
-> Windows PowerShell：`git clone https://github.com/yinweb49-sudo/spec-to-ship.git "$env:USERPROFILE\.claude\skills\spec-to-ship"`
+> Windows PowerShell：`git clone https://github.com/yinweb49-sudo/baogongtou.git "$env:USERPROFILE\.claude\skills\baogongtou"`
 
 或作为项目子模块（团队 / 多机、版本可控）：
 
 ```bash
-git submodule add https://github.com/yinweb49-sudo/spec-to-ship.git .claude/skills/spec-to-ship
+git submodule add https://github.com/yinweb49-sudo/baogongtou.git .claude/skills/baogongtou
 ```
 
 ### Codex
 
 ```bash
-git clone https://github.com/yinweb49-sudo/spec-to-ship.git ~/.codex/skills/spec-to-ship
+git clone https://github.com/yinweb49-sudo/baogongtou.git ~/.codex/skills/baogongtou
 ```
 
-> Windows PowerShell：`git clone https://github.com/yinweb49-sudo/spec-to-ship.git "$env:USERPROFILE\.codex\skills\spec-to-ship"`
+> Windows PowerShell：`git clone https://github.com/yinweb49-sudo/baogongtou.git "$env:USERPROFILE\.codex\skills\baogongtou"`
 
 施工前把角色文件复制进项目（随仓库提交，团队共用）：
 
 ```bash
-mkdir -p .codex/agents && cp ~/.codex/skills/spec-to-ship/templates/codex-agents/*.toml .codex/agents/
+mkdir -p .codex/agents && cp ~/.codex/skills/baogongtou/templates/codex-agents/*.toml .codex/agents/
 ```
 
-角色文件里的 `model` 是占位符：开工时总指挥会列出 Codex 当前可选的模型，按系列名（Sol / Astra / Luna）填入最新一代并告诉你。没有角色文件时，Codex 子 agent 会继承总指挥的最强模型做开发，额度消耗明显变大。
+角色文件里的 `model` 是占位符：开工时包工头会列出 Codex 当前可选的模型，按系列名（Sol / Astra / Luna）填入最新一代并告诉你。没有角色文件时，Codex 子 agent 会继承包工头的最强模型做开发，额度消耗明显变大。
 
-### 从 requirements-writer 升级
+### 从 requirements-writer / spec-to-ship 升级
 
-1. 删除旧安装目录（`~/.claude/skills/requirements-writer`、`~/.codex/skills/requirements-writer`），按上面重新安装。两个名字同时存在会让工具里出现两个相似的 skill。
-2. 项目里的 `requirements-profile.md` 保持原名即可；想用施工功能时，按 `references/project-profile-template.md` 末尾补上“总指挥施工”一节。
-3. 已有的分期文档不用改：总指挥会按其中的期次总览和阶段交接继续；新写的文档会多出“施工指挥基线”和“施工安排”两节。
+1. 删除旧安装目录（`~/.claude/skills/requirements-writer`、`~/.claude/skills/baogongtou`，Codex 下同理），按上面重新安装。新旧名字同时存在会让工具里出现两个相似的 skill。
+2. 项目里的 `requirements-profile.md` 保持原名即可；想用施工功能时，按 `references/project-profile-template.md` 末尾补上“包工头施工”一节。
+3. 已有的分期文档不用改：包工头会按其中的期次总览和阶段交接继续；旧文档里的“总指挥”就是包工头，《总指挥工作记录》和“新总指挥开场提示词”照常能接手。新写的文档会多出“施工指挥基线”和“施工安排”两节。
 
 ## 使用
 
+**唤起方式**：说“包工头”“包工头模式”“用包工头方式完成这套需求”，或写需求类的话（写需求、拆期、出开发提示词、复审需求）；最稳的是直接输入 `/baogongtou`（Claude Code）或 `$baogongtou`（Codex）。旧说法“总指挥模式”“接手总指挥”同样有效。
+
 1. **建项目档案**：复制 `references/project-profile-template.md` 到你的项目仓库根（或 `.agents/`、`docs/`），改名为 `requirements-profile.md`，按提示填空。可参考 `examples/example-profile.md`（虚构示例）。
-2. **写需求**：用 T1 模型开会话，说“按 spec-to-ship 编写 XX 功能的开发需求文档和分期提示词”。skill 读档案 → 选文档强度 → 建证据与决策 → 一次性写完主需求文档和期 0 到期 N 的全部提示词 → 自检后问你是否开工。
-3. **开工**：说“开始开发”或“从期 N 开工”。总指挥先给分批计划，再逐期派子 agent 施工，原型期唤起本地预览交你实测，确认后复核后续期次并继续；需要你拍板时会用大白话、按编号问你。
-4. **接手**：总指挥会话变长或换电脑时，它会写《总指挥工作记录》并给出开场提示词；开新窗口粘贴即可继续。
+2. **写需求**：用 T1 模型开会话，说“按包工头方式写 XX 功能的需求”，或直接唤起 `/baogongtou`（Codex 为 `$baogongtou`）。skill 读档案 → 选文档强度 → 建证据与决策 → 一次性写完主需求文档和期 0 到期 N 的全部提示词 → 自检后问你是否开工。
+3. **开工**：说“用包工头方式完成这套需求”或“从期 N 开工”。包工头先给分批计划，再逐期派子 agent 施工，原型期唤起本地预览交你实测，确认后复核后续期次并继续；需要你拍板时会用大白话、按编号问你。
+4. **接手**：包工头会话变长或换电脑时，它会写《包工头工作记录》并给出开场提示词；开新窗口粘贴即可继续。
 
 产出结构：
 
@@ -152,7 +166,7 @@ mkdir -p .codex/agents && cp ~/.codex/skills/spec-to-ship/templates/codex-agents
 docs/<功能名称>/
 ├── 00-需求证据与原话参考.md        # 标准 / 审计模式的历史证据，不是最终执行基线
 ├── <功能名称>-开发需求文档.md      # v0.9 待视觉确认基线 → v1.0 已确认开发基线
-├── 总指挥工作记录-第N轮-*.md       # 阶段二每轮一份
+├── 包工头工作记录-第N轮-*.md       # 阶段二每轮一份
 └── 开发提示词/
     ├── README.md                   # 期次总览、视觉确认门槛线、施工指挥基线
     ├── 期0-技术探针.md              # 仅技术事实阻塞视觉成立时
