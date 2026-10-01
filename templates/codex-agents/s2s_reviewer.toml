@@ -1,10 +1,10 @@
 # spec-to-ship · 审查顾问角色（T1 前沿档，只读）
 # 复制到项目的 .codex/agents/（随仓库共享）或 ~/.codex/agents/（个人跨项目）。
-# 模型换代时只改 model 一行，并同步 references/model-roles.md 的对照表。
+# model 是占位符：开工时由总指挥按系列名（Astra）填入 Codex 当前可选的最新型号，见 references/model-roles.md 第四节。
 
 name = "s2s_reviewer"
 description = "spec-to-ship 审查顾问：只读审查涉及钱、鉴权、密钥、删除、迁移的期次，或仲裁有争议的结论；不改代码。"
-model = "gpt-6-astra"
+model = "<Astra 系列当前最新型号>"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"
 
