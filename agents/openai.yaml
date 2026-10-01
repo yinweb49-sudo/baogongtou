@@ -1,4 +1,4 @@
 interface:
-  display_name: "Vibe Coding 需求编写"
-  short_description: "视觉先行澄清需求，一次写完可执行、可恢复的分期开发文档，并在前后端之间划出视觉确认门槛"
-  default_prompt: "Use $requirements-writer to turn my idea into a visual-first, traceable, phased development specification."
+  display_name: "Spec to Ship 从需求到交付"
+  short_description: "视觉先行澄清需求、一次写完可恢复的分期文档，再由总指挥派子 agent 逐期施工到交付"
+  default_prompt: "Use $spec-to-ship to turn my idea into a traceable, phased specification, then act as the commander that dispatches subagents to build it phase by phase."

@@ -1,4 +1,4 @@
-# 轻记 LightDiary · 需求文档编写项目档案（requirements-profile）
+# 轻记 LightDiary · 项目档案（requirements-profile）
 
 > **这是一份虚构的示例档案**，仅用于演示 `requirements-profile.md` 该怎么填。
 > 里面的产品、服务名、端口、路径都是编造的，请勿照抄——按 `references/project-profile-template.md` 填你自己项目的真实值。
@@ -82,3 +82,17 @@
 
 - 前端 dev 5180 · 本地后端 8790 · 云端后端 8890
 - 前端构建产物写入 `local-api/wwwroot`；云端管理台产物进入 `cloud-api/wwwroot/admin`
+
+## 总指挥施工
+
+- 开发工具：家里用 Claude Code，公司用 Codex
+- 角色模型覆盖：无，按 skill 对照表
+- Codex 角色文件位置：`.codex/agents/`（随仓库提交）
+- 测试纪律：开发中只跑相关测试，收尾全量一次；`local-api` 测试加 `--logger trx` 便于定位偶发失败
+- 测试命令：`npm test --workspace desktop-web -- <文件>`、`dotnet test local-api.Tests --logger trx`
+- 端口分配：用户走查 5180 / 8790；子 agent 联调 5190 / 8795；子 agent 自测 8796
+- 红线操作的执行人：云端部署与生产配置由用户亲手执行；订阅扣费相关期次真实付款前先问
+- 必审范围：订阅计费、账号注销、云同步数据迁移
+- 额度管理：不主动询问
+- 汇报对象的沟通约定：中文、先讲结果再讲原因
+- 多台电脑的仓库路径：只有一台开发机
