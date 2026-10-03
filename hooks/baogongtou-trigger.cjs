@@ -19,6 +19,24 @@ const CONFIRM = [
   /整理成文档/, /落成文档/, /写成文档/, /可以开始写/, /可以开工/, /开工吧/,
 ];
 
+// 在包工头自己的仓库或安装目录里（维护 skill 时）不触发：
+// 从当前目录逐级往上找，遇到 name 为 baogongtou 的 SKILL.md 就跳过。
+function insideSkillRepo(cwd) {
+  const fs = require('fs');
+  const path = require('path');
+  let dir = cwd;
+  for (let i = 0; dir && i < 30; i++) {
+    try {
+      const head = fs.readFileSync(path.join(dir, 'SKILL.md'), 'utf8').slice(0, 300);
+      if (/^name:\s*baogongtou\s*$/m.test(head)) return true;
+    } catch {}
+    const parent = path.dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return false;
+}
+
 function readStdin() {
   return new Promise((resolve) => {
     let data = '';
@@ -37,13 +55,16 @@ function emit(text) {
 
 (async () => {
   let prompt = '';
+  let cwd = '';
   try {
     const input = JSON.parse(await readStdin());
     prompt = input.prompt ?? input.user_message ?? input.message ?? '';
+    cwd = typeof input.cwd === 'string' ? input.cwd : '';
   } catch {
     return;
   }
   if (typeof prompt !== 'string' || !prompt) return;
+  if (cwd && insideSkillRepo(cwd)) return;
 
   const hit = (list) => {
     for (const re of list) {
