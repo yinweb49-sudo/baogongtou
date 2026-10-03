@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-label="对话演示：确认需求后开启包工头模式，原型完成后自动打开试用并给出测试步骤">
+  <defs>
+    <style>
+      .ui { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+      .mono { font-family: "Cascadia Mono", "JetBrains Mono", Consolas, "Microsoft YaHei", "PingFang SC", monospace; font-size: 16px; }
+      .u { fill: #FFB27A; } .a { fill: #E6E8EB; } .m { fill: #8B949E; } .g { fill: #7EE787; } .o { fill: #FF7A1A; }
+      .l { opacity: 0; }
+      .l1 { animation: l1 16s infinite; } .l2 { animation: l2 16s infinite; } .l3 { animation: l3 16s infinite; }
+      .l4 { animation: l4 16s infinite; } .l5 { animation: l5 16s infinite; } .l6 { animation: l6 16s infinite; }
+      .l7 { animation: l7 16s infinite; } .l8 { animation: l8 16s infinite; } .l9 { animation: l9 16s infinite; }
+      .l10 { animation: l10 16s infinite; } .l11 { animation: l11 16s infinite; } .l12 { animation: l12 16s infinite; }
+      .l13 { animation: l13 16s infinite; }
+      @keyframes l1 { 0%, 3% { opacity: 0; transform: translateY(6px); } 5%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l2 { 0%, 12% { opacity: 0; transform: translateY(6px); } 14%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l3 { 0%, 17% { opacity: 0; transform: translateY(6px); } 19%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l4 { 0%, 21% { opacity: 0; transform: translateY(6px); } 23%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l5 { 0%, 31% { opacity: 0; transform: translateY(6px); } 33%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l6 { 0%, 41% { opacity: 0; transform: translateY(6px); } 43%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l7 { 0%, 45% { opacity: 0; transform: translateY(6px); } 47%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l8 { 0%, 49% { opacity: 0; transform: translateY(6px); } 51%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l9 { 0%, 52% { opacity: 0; transform: translateY(6px); } 54%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l10 { 0%, 55% { opacity: 0; transform: translateY(6px); } 57%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l11 { 0%, 58% { opacity: 0; transform: translateY(6px); } 60%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l12 { 0%, 65% { opacity: 0; transform: translateY(6px); } 67%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      @keyframes l13 { 0%, 68% { opacity: 0; transform: translateY(6px); } 70%, 94% { opacity: 1; transform: none; } 99%, 100% { opacity: 0; } }
+      .cursor { animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+    </style>
+  </defs>
+
+  <!-- 窗口 -->
+  <rect width="1000" height="600" rx="16" fill="#0E1116"/>
+  <rect x="0.75" y="0.75" width="998.5" height="598.5" rx="15.5" fill="none" stroke="#2E3540" stroke-width="1.5"/>
+  <path d="M0 16 a16 16 0 0 1 16 -16 h968 a16 16 0 0 1 16 16 v28 h-1000z" fill="#171B22"/>
+  <circle cx="26" cy="22" r="6" fill="#FF5F57"/><circle cx="46" cy="22" r="6" fill="#FEBC2E"/><circle cx="66" cy="22" r="6" fill="#28C840"/>
+  <text class="ui" x="500" y="27" font-size="13" text-anchor="middle" fill="#8B949E">Claude Code · 我的项目</text>
+
+  <g class="mono">
+    <text class="l l1" x="40" y="92"><tspan class="o">›</tspan><tspan class="u"> 会员中心就按这个方案来，整理成文档吧</tspan></text>
+
+    <text class="l l2" x="40" y="138"><tspan class="g">●</tspan><tspan class="a" font-weight="700"> 已开启包工头模式（当前阶段：需求编写）</tspan></text>
+    <text class="l l3" x="64" y="168"><tspan class="m">整理了 12 条原话、5 项决定；拆成 3 个功能包、共 7 期。</tspan></text>
+    <text class="l l4" x="64" y="198"><tspan class="a">整套文档已写完，可以开工吗？</tspan></text>
+
+    <text class="l l5" x="40" y="244"><tspan class="o">›</tspan><tspan class="u"> 开工</tspan></text>
+
+    <text class="l l6" x="40" y="290"><tspan class="g">●</tspan><tspan class="a" font-weight="700"> 期 1《会员中心原型》完成，已为您打开：会员中心页面</tspan></text>
+    <text class="l l7" x="64" y="320"><tspan class="m">测试步骤：</tspan></text>
+    <text class="l l8" x="64" y="350"><tspan class="a">1. 点右上角头像 → 应看到会员等级和到期日</tspan></text>
+    <text class="l l9" x="64" y="380"><tspan class="a">2. 点「续费」 → 应弹出三档套餐</tspan></text>
+    <text class="l l10" x="64" y="410"><tspan class="a">3. 断网后刷新 → 应提示“网络异常，点此重试”</tspan></text>
+    <text class="l l11" x="64" y="440"><tspan class="m">注意：价格还是演示数据；没问题回“通过”。</tspan></text>
+
+    <g class="l l12">
+      <line x1="40" y1="472" x2="960" y2="472" stroke="#2E3540" stroke-dasharray="4 4"/>
+      <text x="40" y="504"><tspan class="o" font-weight="700">待您决定（1 项）</tspan></text>
+    </g>
+    <text class="l l13" x="64" y="536"><tspan class="a">Q-001【不急，期 4 开工前】续费要支持自动续订吗？</tspan><tspan class="m">建议：先不做</tspan></text>
+  </g>
+
+  <rect class="cursor" x="40" y="556" width="10" height="20" fill="#FF7A1A"/>
+</svg>

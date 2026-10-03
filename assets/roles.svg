@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-label="工地分工：业主、包工头、施工队、监理、验料员">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10z" fill="#5B6573"/>
+    </marker>
+    <marker id="arrO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10z" fill="#FF7A1A"/>
+    </marker>
+    <style>
+      .sans { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif; }
+      .card { fill: #1A1F26; stroke: #2E3540; stroke-width: 1.5; }
+      .flow { stroke-dasharray: 7 7; animation: flow 1.6s linear infinite; }
+      .flow-rev { stroke-dasharray: 7 7; animation: flowrev 1.6s linear infinite; }
+      @keyframes flow { to { stroke-dashoffset: -28; } }
+      @keyframes flowrev { to { stroke-dashoffset: 28; } }
+      .pulse { animation: pulse 2.4s ease-in-out infinite; }
+      @keyframes pulse { 0%, 100% { stroke-opacity: 0.35; } 50% { stroke-opacity: 0.9; } }
+    </style>
+  </defs>
+
+  <rect width="1200" height="400" rx="20" fill="#12151A"/>
+
+  <!-- 连线：业主 ⇄ 包工头 -->
+  <g fill="none" stroke-width="2">
+    <line class="flow" x1="302" y1="182" x2="466" y2="182" stroke="#FF7A1A" marker-end="url(#arrO)"/>
+    <line class="flow-rev" x1="466" y1="218" x2="302" y2="218" stroke="#5B6573" marker-end="url(#arr)"/>
+  </g>
+  <g class="sans" font-size="13" text-anchor="middle">
+    <text x="384" y="170" fill="#FFB27A">说需求 · 拍板 · 试用反馈</text>
+    <text x="384" y="240" fill="#8B949E">大白话汇报 · 试用说明</text>
+  </g>
+
+  <!-- 连线：包工头 → 三个子 agent -->
+  <g fill="none" stroke-width="2" stroke="#5B6573">
+    <path class="flow" d="M732 178 C 816 178, 816 85, 896 85" marker-end="url(#arr)"/>
+    <path class="flow" d="M732 200 L 896 200" marker-end="url(#arr)"/>
+    <path class="flow" d="M732 222 C 816 222, 816 315, 896 315" marker-end="url(#arr)"/>
+  </g>
+  <g fill="#12151A">
+    <rect x="752" y="102" width="108" height="20" rx="4"/>
+    <rect x="762" y="278" width="88" height="20" rx="4"/>
+  </g>
+  <g class="sans" font-size="13" text-anchor="middle" fill="#8B949E">
+    <text x="806" y="116">任务书 ⇄ 汇报</text>
+    <text x="814" y="192">审查 · 仲裁</text>
+    <text x="806" y="292">核对（可选）</text>
+  </g>
+
+  <!-- 业主 -->
+  <g class="sans">
+    <rect class="card" x="60" y="146" width="240" height="108" rx="14"/>
+    <text x="84" y="186" font-size="22" font-weight="700" fill="#F3F4F6">业主</text>
+    <text x="136" y="186" font-size="14" fill="#8B949E">就是你</text>
+    <text x="84" y="216" font-size="13" fill="#C9D1D9">说需求 · 看样板间 · 拍板</text>
+    <text x="84" y="238" font-size="13" fill="#6E7681">只需看业务话和测试步骤</text>
+  </g>
+
+  <!-- 包工头 -->
+  <g class="sans">
+    <rect x="470" y="126" width="260" height="148" rx="16" fill="#1F1A15" stroke="#FF7A1A" stroke-width="2"/>
+    <rect class="pulse" x="462" y="118" width="276" height="164" rx="20" fill="none" stroke="#FF7A1A" stroke-width="2"/>
+    <text x="496" y="168" font-size="26" font-weight="800" fill="#FFFFFF">包工头</text>
+    <text x="580" y="166" font-size="13" fill="#FFB27A">主会话 · 最强档模型</text>
+    <text x="496" y="200" font-size="13" fill="#E6E8EB">谈需求 · 出图纸 · 排工期</text>
+    <text x="496" y="224" font-size="13" fill="#E6E8EB">派活 · 盯进度 · 跑手续</text>
+    <text x="496" y="248" font-size="13" fill="#8B949E">不写代码，只指挥和把关</text>
+  </g>
+
+  <!-- 施工队 -->
+  <g class="sans">
+    <rect class="card" x="900" y="40" width="240" height="90" rx="14"/>
+    <text x="922" y="76" font-size="20" font-weight="700" fill="#F3F4F6">施工队</text>
+    <text x="992" y="75" font-size="12" fill="#8B949E">子 agent · 主力档</text>
+    <text x="922" y="106" font-size="13" fill="#C9D1D9">按图纸一期一期施工</text>
+  </g>
+
+  <!-- 监理 -->
+  <g class="sans">
+    <rect class="card" x="900" y="155" width="240" height="90" rx="14"/>
+    <text x="922" y="191" font-size="20" font-weight="700" fill="#F3F4F6">监理</text>
+    <text x="972" y="190" font-size="12" fill="#8B949E">子 agent · 最强档 · 只读</text>
+    <text x="922" y="221" font-size="13" fill="#C9D1D9">钱相关必审 · 争议仲裁</text>
+  </g>
+
+  <!-- 验料员 -->
+  <g class="sans">
+    <rect class="card" x="900" y="270" width="240" height="90" rx="14"/>
+    <text x="922" y="306" font-size="20" font-weight="700" fill="#F3F4F6">验料员</text>
+    <text x="992" y="305" font-size="12" fill="#8B949E">子 agent · 轻快档 · 可选</text>
+    <text x="922" y="336" font-size="13" fill="#C9D1D9">开工前核对图纸与现场</text>
+  </g>
+</svg>

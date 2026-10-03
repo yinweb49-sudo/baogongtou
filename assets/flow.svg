@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-label="全流程：谈需求、出图纸、样板间、视觉确认门槛、分期施工、大功能试用、交付">
+  <defs>
+    <style>
+      .sans { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif; }
+      .box { fill: #1A1F26; stroke: #2E3540; stroke-width: 1.5; }
+      .b1 { animation: b1 9s infinite; } .b2 { animation: b2 9s infinite; } .b3 { animation: b3 9s infinite; }
+      .b4 { animation: b4 9s infinite; } .b5 { animation: b5 9s infinite; } .b6 { animation: b6 9s infinite; }
+      @keyframes b1 { 0%, 92% { stroke: #FF7A1A; } 97%, 100% { stroke: #2E3540; } }
+      @keyframes b2 { 0%, 15% { stroke: #2E3540; } 17%, 92% { stroke: #FF7A1A; } 97%, 100% { stroke: #2E3540; } }
+      @keyframes b3 { 0%, 31% { stroke: #2E3540; } 33%, 92% { stroke: #FF7A1A; } 97%, 100% { stroke: #2E3540; } }
+      @keyframes b4 { 0%, 51% { stroke: #2E3540; } 53%, 92% { stroke: #FF7A1A; } 97%, 100% { stroke: #2E3540; } }
+      @keyframes b5 { 0%, 67% { stroke: #2E3540; } 69%, 92% { stroke: #FF7A1A; } 97%, 100% { stroke: #2E3540; } }
+      @keyframes b6 { 0%, 84% { stroke: #2E3540; } 86%, 92% { stroke: #3FB950; } 97%, 100% { stroke: #2E3540; } }
+      .dot { animation: dot 9s infinite linear; }
+      @keyframes dot { 0% { transform: translateX(0); opacity: 1; } 85% { transform: translateX(945px); opacity: 1; } 92% { transform: translateX(945px); opacity: 0; } 100% { transform: translateX(0); opacity: 0; } }
+      .ok { opacity: 0; animation: ok 9s infinite; }
+      @keyframes ok { 0%, 41% { opacity: 0; } 44%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+    </style>
+  </defs>
+
+  <rect width="1200" height="330" rx="20" fill="#12151A"/>
+
+  <g class="sans">
+    <text x="48" y="54" font-size="22" font-weight="700" fill="#F3F4F6">全流程</text>
+    <text x="126" y="54" font-size="16" fill="#8B949E">文档一次写完，施工分段放行</text>
+  </g>
+
+  <!-- 连线 -->
+  <line x1="120" y1="170" x2="1065" y2="170" stroke="#2E3540" stroke-width="2"/>
+
+  <!-- 移动的光点 -->
+  <g class="dot">
+    <circle cx="120" cy="170" r="10" fill="#FF7A1A" fill-opacity="0.25"/>
+    <circle cx="120" cy="170" r="5" fill="#FF7A1A"/>
+  </g>
+
+  <!-- 视觉确认门槛线 -->
+  <g class="sans">
+    <line x1="590" y1="104" x2="590" y2="236" stroke="#FF7A1A" stroke-width="2" stroke-dasharray="6 5"/>
+    <text x="590" y="92" text-anchor="middle" font-size="13" fill="#FF9A4D">视觉确认门槛线</text>
+    <g class="ok">
+      <rect x="560" y="122" width="60" height="22" rx="11" fill="#16261C" stroke="#3FB950" stroke-opacity="0.7"/>
+      <text x="590" y="138" text-anchor="middle" font-size="12" fill="#7EE787">✓ 已确认</text>
+    </g>
+  </g>
+
+  <!-- 节点 -->
+  <g class="sans" text-anchor="middle">
+    <rect class="box b1" x="45" y="128" width="150" height="84" rx="12"/>
+    <text x="120" y="164" font-size="18" font-weight="700" fill="#F3F4F6">谈需求</text>
+    <text x="120" y="190" font-size="13" fill="#8B949E">原话留证据</text>
+
+    <rect class="box b2" x="225" y="128" width="150" height="84" rx="12"/>
+    <text x="300" y="164" font-size="18" font-weight="700" fill="#F3F4F6">出图纸</text>
+    <text x="300" y="190" font-size="13" fill="#8B949E">文档一次写完</text>
+
+    <rect class="box b3" x="405" y="128" width="150" height="84" rx="12"/>
+    <text x="480" y="164" font-size="18" font-weight="700" fill="#F3F4F6">样板间</text>
+    <text x="480" y="190" font-size="13" fill="#8B949E">可交互原型</text>
+
+    <rect class="box b4" x="625" y="128" width="150" height="84" rx="12"/>
+    <text x="700" y="164" font-size="18" font-weight="700" fill="#F3F4F6">分期施工</text>
+    <text x="700" y="190" font-size="13" fill="#8B949E">按交付包推进</text>
+
+    <rect class="box b5" x="805" y="128" width="150" height="84" rx="12"/>
+    <text x="880" y="164" font-size="18" font-weight="700" fill="#F3F4F6">大功能试用</text>
+    <text x="880" y="190" font-size="13" fill="#8B949E">自动打开 + 测试步骤</text>
+
+    <rect class="box b6" x="990" y="128" width="150" height="84" rx="12"/>
+    <text x="1065" y="164" font-size="18" font-weight="700" fill="#F3F4F6">交付</text>
+    <text x="1065" y="190" font-size="13" fill="#8B949E">报告 + 交接</text>
+  </g>
+
+  <!-- 阶段分组 -->
+  <g class="sans" font-size="14" text-anchor="middle">
+    <path d="M45 248 v8 h510 v-8" fill="none" stroke="#3A434F" stroke-width="1.5"/>
+    <text x="300" y="284" fill="#C9D1D9">阶段一 · 需求编写</text>
+    <text x="300" y="306" font-size="12" fill="#6E7681">当前会话亲自完成，不派子 agent</text>
+    <path d="M625 248 v8 h515 v-8" fill="none" stroke="#3A434F" stroke-width="1.5"/>
+    <text x="882" y="284" fill="#C9D1D9">阶段二 · 包工头施工</text>
+    <text x="882" y="306" font-size="12" fill="#6E7681">包工头派子 agent 逐期施工，监理把关</text>
+  </g>
+</svg>

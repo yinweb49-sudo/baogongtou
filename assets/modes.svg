@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-label="两种运行模式：半自动（默认）与全自动">
+  <defs>
+    <style>
+      .sans { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Source Han Sans SC", sans-serif; }
+      .ping { animation: ping 1.8s ease-out infinite; transform-origin: 538px 86px; transform-box: view-box; }
+      @keyframes ping { 0% { transform: scale(1); opacity: 0.8; } 80%, 100% { transform: scale(2.4); opacity: 0; } }
+      .z1 { animation: z 3.6s ease-in-out infinite; }
+      .z2 { animation: z 3.6s ease-in-out infinite 1.2s; }
+      .z3 { animation: z 3.6s ease-in-out infinite 2.4s; }
+      @keyframes z { 0% { opacity: 0; transform: translate(0, 0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(10px, -22px); } }
+      .lbl { font-size: 14px; fill: #8B949E; }
+      .val { font-size: 15px; fill: #E6E8EB; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="440" rx="20" fill="#12151A"/>
+
+  <!-- 半自动 -->
+  <g class="sans">
+    <rect x="40" y="40" width="540" height="360" rx="16" fill="#1A1F26" stroke="#2E3540" stroke-width="1.5"/>
+    <text x="72" y="96" font-size="24" font-weight="800" fill="#F3F4F6">半自动模式</text>
+    <rect x="212" y="76" width="52" height="26" rx="13" fill="#FF7A1A" fill-opacity="0.14" stroke="#FF7A1A" stroke-opacity="0.6"/>
+    <text x="238" y="94" font-size="13" text-anchor="middle" fill="#FFB27A">默认</text>
+    <!-- 提醒小铃：有事要拍板 -->
+    <circle class="ping" cx="538" cy="86" r="7" fill="none" stroke="#FF7A1A" stroke-width="2"/>
+    <circle cx="538" cy="86" r="7" fill="#FF7A1A"/>
+    <text x="72" y="126" font-size="14" fill="#8B949E">你在电脑前，随时能答复</text>
+
+    <g>
+      <line x1="72" y1="148" x2="548" y2="148" stroke="#262C35"/>
+      <text class="lbl" x="72" y="180">要拍板的事</text><text class="val" x="190" y="180">记进《待您决定》，卡住施工的弹窗问</text>
+      <line x1="72" y1="200" x2="548" y2="200" stroke="#262C35"/>
+      <text class="lbl" x="72" y="232">不急的事</text><text class="val" x="190" y="232">攒到试用时问，到期按建议先做</text>
+      <line x1="72" y1="252" x2="548" y2="252" stroke="#262C35"/>
+      <text class="lbl" x="72" y="284">大功能完工</text><text class="val" x="190" y="284">自动打开试用，等你反馈再继续</text>
+      <line x1="72" y1="304" x2="548" y2="304" stroke="#262C35"/>
+      <text class="lbl" x="72" y="336">红线操作</text><text class="val" x="190" y="336">花钱、上线、删除，先问你</text>
+      <line x1="72" y1="356" x2="548" y2="356" stroke="#262C35"/>
+      <text class="lbl" x="72" y="382">怎么开</text><text class="val" x="190" y="382">什么都不用说</text>
+    </g>
+  </g>
+
+  <!-- 全自动 -->
+  <g class="sans">
+    <rect x="620" y="40" width="540" height="360" rx="16" fill="#1A1F26" stroke="#FF7A1A" stroke-opacity="0.7" stroke-width="1.5"/>
+    <text x="652" y="96" font-size="24" font-weight="800" fill="#F3F4F6">全自动模式</text>
+    <rect x="792" y="76" width="96" height="26" rx="13" fill="#5AA9FF" fill-opacity="0.12" stroke="#5AA9FF" stroke-opacity="0.6"/>
+    <text x="840" y="94" font-size="13" text-anchor="middle" fill="#9CCBFF">离开电脑时</text>
+    <!-- 月亮与 Zzz：你去休息 -->
+    <path d="M1124 74 a14 14 0 1 0 12 22 a11 11 0 1 1 -12 -22z" fill="#9CCBFF"/>
+    <text class="z1" x="1098" y="78" font-size="12" font-weight="700" fill="#9CCBFF">z</text>
+    <text class="z2" x="1090" y="88" font-size="14" font-weight="700" fill="#9CCBFF">z</text>
+    <text class="z3" x="1082" y="98" font-size="16" font-weight="700" fill="#9CCBFF">Z</text>
+    <text x="652" y="126" font-size="14" fill="#8B949E">你长时间离开，让 AI 把一长串期次做完</text>
+
+    <g>
+      <line x1="652" y1="148" x2="1128" y2="148" stroke="#262C35"/>
+      <text class="lbl" x="652" y="180">开启前</text><text class="val" x="770" y="180">自检 + 讲清注意事项；视觉未确认不能开</text>
+      <line x1="652" y1="200" x2="1128" y2="200" stroke="#262C35"/>
+      <text class="lbl" x="652" y="232">要拍板的事</text><text class="val" x="770" y="232">包工头按建议直接定，逐条记录</text>
+      <line x1="652" y1="252" x2="1128" y2="252" stroke="#262C35"/>
+      <text class="lbl" x="652" y="284">大功能完工</text><text class="val" x="770" y="284">派人按测试步骤自己走一遍，留证据</text>
+      <line x1="652" y1="304" x2="1128" y2="304" stroke="#262C35"/>
+      <text class="lbl" x="652" y="336">红线操作</text><text class="val" x="770" y="336">一律跳过，留给你回来执行</text>
+      <line x1="652" y1="356" x2="1128" y2="356" stroke="#262C35"/>
+      <text class="lbl" x="652" y="382">结束时</text><text class="val" x="770" y="382">决策报告 + 验收报告 + 打开试用</text>
+    </g>
+  </g>
+</svg>
