@@ -58,6 +58,8 @@ baogongtou/
 │   ├── foreman-handoff-template.md     # 【阶段二】包工头工作记录与新包工头开场提示词模板
 │   ├── review-checklist.md               # 需求 / 提示词 / 包工头施工评审清单
 │   └── project-profile-template.md       # 【新项目填这个】项目档案空白模板
+├── hooks/
+│   └── baogongtou-trigger.cjs            # 【可选】Claude Code 关键词强制唤起钩子
 ├── templates/
 │   └── codex-agents/                     # Codex 角色文件，复制到项目 .codex/agents/
 │       ├── bgt_crew.toml            #   施工队 → Sol 系列
@@ -149,6 +151,28 @@ mkdir -p .codex/agents && cp ~/.codex/skills/baogongtou/templates/codex-agents/*
 
 角色文件里的 `model` 是占位符：开工时包工头会列出 Codex 当前可选的模型，按系列名（Sol / Astra / Luna）填入最新一代并告诉你。没有角色文件时，Codex 子 agent 会继承包工头的最强模型做开发，额度消耗明显变大。
 
+### 关键词强制唤起（推荐）
+
+skill 是否被自动唤起，由 AI 读 skill 简介后自己判断；装的 skill 多时，Claude Code 还会为节省上下文把简介截短（默认所有简介合计只占上下文约 1%）。所以光靠简介不够稳，尤其是讨论完需求说“就这么定了”时，AI 容易直接按自己的理解写需求。
+
+**Claude Code**：在用户级 `~/.claude/settings.json` 的 `hooks.UserPromptSubmit` 数组里加一项（保留已有的项，路径换成你的安装位置）：
+
+```json
+{
+  "hooks": [
+    {
+      "type": "command",
+      "command": "node \"C:/Users/<你>/.claude/skills/baogongtou/hooks/baogongtou-trigger.cjs\"",
+      "timeout": 10
+    }
+  ]
+}
+```
+
+之后每条消息都会过一遍关键词：命中“写需求、需求文档、PRD、拆期、包工头”等指令类说法，强制要求 AI 先加载包工头；命中“就这么定了、按这个方案来、整理成文档”等确认类说法，要求 AI 判断是否在讨论功能需求，是才加载。加载后 AI 第一句会说“已开启包工头模式”。需要本机装有 Node.js。
+
+**Codex**：把 `SKILL.md` 简介里的触发说法写进全局 `~/.codex/AGENTS.md`，作为硬规则（加载 `$baogongtou`、第一句声明已开启包工头模式）。
+
 ### 从 requirements-writer / spec-to-ship 升级
 
 1. 删除旧安装目录（`~/.claude/skills/requirements-writer`、`~/.claude/skills/baogongtou`，Codex 下同理），按上面重新安装。新旧名字同时存在会让工具里出现两个相似的 skill。
@@ -157,7 +181,7 @@ mkdir -p .codex/agents && cp ~/.codex/skills/baogongtou/templates/codex-agents/*
 
 ## 使用
 
-**唤起方式**：说“包工头”“包工头模式”“用包工头方式完成这套需求”，或写需求类的话（写需求、拆期、出开发提示词、复审需求）；最稳的是直接输入 `/baogongtou`（Claude Code）或 `$baogongtou`（Codex）。旧说法“总指挥模式”“接手总指挥”同样有效。
+**唤起方式**：说“包工头”“包工头模式”“用包工头方式完成这套需求”，或写需求类的话（写需求、需求文档、PRD、拆期、出开发提示词、复审需求），或讨论完功能后说确认的话（需求确认了、就这么定了、按这个方案来、整理成文档）；唤起后 AI 第一句会说“已开启包工头模式”；最稳的是直接输入 `/baogongtou`（Claude Code）或 `$baogongtou`（Codex）。旧说法“总指挥模式”“接手总指挥”同样有效。
 
 1. **建项目档案**：复制 `references/project-profile-template.md` 到你的项目仓库根（或 `.agents/`、`docs/`），改名为 `requirements-profile.md`，按提示填空。可参考 `examples/example-profile.md`（虚构示例）。
 2. **写需求**：用 T1 模型开会话，说“按包工头方式写 XX 功能的需求”，或直接唤起 `/baogongtou`（Codex 为 `$baogongtou`）。skill 读档案 → 选文档强度 → 建证据与决策 → 一次性写完主需求文档和期 0 到期 N 的全部提示词 → 自检后问你是否开工。
