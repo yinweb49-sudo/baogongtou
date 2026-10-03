@@ -2,6 +2,8 @@
 
 需求文档和期次写完后，由包工头带子 agent 一期一期做完。角色与模型见 `references/model-roles.md`，任务书模板见 `references/dispatch-brief-template.md`，交接模板见 `references/foreman-handoff-template.md`。
 
+本工作流按默认的**半自动模式**写：用户在场，要拍板的事、试用、熔断复盘、交接都会停下等用户。用户开启**全自动模式**后，这些“停下等用户”的环节按 `references/full-auto-mode.md` 第二节替代，其余规则不变。
+
 本工作流提炼自一个 30 余期真实项目的 6 轮施工（含两台电脑交替开发、生产部署和上线验收）。每条规则后面的“依据”是当时的事故或实测。
 
 ## 目录

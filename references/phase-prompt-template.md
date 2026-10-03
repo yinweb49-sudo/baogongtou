@@ -109,6 +109,7 @@
 
 ## 施工指挥基线
 - 执行方式：包工头施工 / 手动逐窗口
+- 运行模式：半自动（默认）/ 全自动（YYYY-MM-DD HH:mm 开启，见 `references/full-auto-mode.md`）
 - 开发工具与角色模型：<Claude Code：包工头 Opus、施工队 Sonnet、监理 Opus / Codex：包工头 Astra、施工队 bgt_crew（Sol）、监理 bgt_supervisor（Astra）；只写系列名；项目档案有覆盖时按档案>
 - 必审期次（做完派监理）：<涉及钱、鉴权、密钥、删除、迁移的期次；没有写“无”>
 - 需用户拍板、拆两段派的期次：<期次与要拍板的事项；没有写“无”>
