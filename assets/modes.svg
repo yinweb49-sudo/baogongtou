@@ -28,9 +28,9 @@
 
     <g>
       <line x1="72" y1="148" x2="548" y2="148" stroke="#262C35"/>
-      <text class="lbl" x="72" y="180">要拍板的事</text><text class="val" x="190" y="180">记进《待您决定》，卡住施工的弹窗问</text>
+      <text class="lbl" x="72" y="180">要拍板的事</text><text class="val" x="190" y="180">本轮要定的弹窗逐项问，附后果和推荐</text>
       <line x1="72" y1="200" x2="548" y2="200" stroke="#262C35"/>
-      <text class="lbl" x="72" y="232">不急的事</text><text class="val" x="190" y="232">攒到试用时问，到期按建议先做</text>
+      <text class="lbl" x="72" y="232">以后的事</text><text class="val" x="190" y="232">只记进《待您决定》，到时再问</text>
       <line x1="72" y1="252" x2="548" y2="252" stroke="#262C35"/>
       <text class="lbl" x="72" y="284">大功能完工</text><text class="val" x="190" y="284">自动打开试用，等你反馈再继续</text>
       <line x1="72" y1="304" x2="548" y2="304" stroke="#262C35"/>
