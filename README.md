@@ -232,6 +232,7 @@ baogongtou/
 ├── SKILL.md                              # skill 主文件：两阶段路由、方法论、工作流
 ├── agents/openai.yaml                    # Codex 界面里的显示名称与默认提示
 ├── assets/                               # README 用的动态示意图
+├── evals/                                # 维护用：回归用例（skill-creator 格式）与维护纪律
 ├── hooks/
 │   └── baogongtou-trigger.cjs            # 【可选】Claude Code 关键词强制唤起
 ├── references/
