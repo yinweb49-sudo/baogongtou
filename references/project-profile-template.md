@@ -101,7 +101,7 @@
 
 不填时按 skill 默认值执行，包工头会在第一次汇报里说明用了哪些默认值。
 
-- 开发工具：Claude Code / Codex / 两者都用（不同电脑）
+- 开发工具：Claude Code / Codex / Antigravity / 多工具混用（不同电脑）
 - 角色模型覆盖：无（按 `references/model-roles.md` 系列对照）/ <角色 → 模型系列，及理由；只写系列名，不写版本号>
 - Codex 角色文件位置：`.codex/agents/`（随仓库）/ `~/.codex/agents/`（个人）/ 不用 Codex
 - 测试纪律：例 开发中只跑相关测试、收尾全量一次；界面调整阶段不跑自动测试，由用户自测

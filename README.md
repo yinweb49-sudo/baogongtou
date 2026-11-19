@@ -5,6 +5,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Claude%20Code-ready-FF7A1A?style=flat-square" alt="Claude Code">
   <img src="https://img.shields.io/badge/Codex-ready-30363D?style=flat-square" alt="Codex">
+  <img src="https://img.shields.io/badge/Antigravity-ready-4285F4?style=flat-square" alt="Antigravity">
   <img src="https://img.shields.io/badge/license-MIT-3FB950?style=flat-square" alt="MIT">
 </p>
 
@@ -91,9 +92,10 @@
 |---|---|---|---|---|
 | **Claude Code** | Opus | Sonnet | Haiku | 派活时写系列别名（`opus` / `sonnet` / `haiku`），自动对应最新一代 |
 | **OpenAI Codex** | Astra | Sol | Luna | 项目 `.codex/agents/` 下的角色文件（本仓库 `templates/codex-agents/` 提供） |
+| **Antigravity** | 包工头：Gemini Neon（Ultra：Carbon）；监理：Gemini Argon 或 Neon | Claude Sonnet（跨系列错峰；额度不足切 Gemini Neon） | Gemini Hydrogen | 施工时用 `swarm` 按角色精准指定型号并跨额度池错峰，无需项目角色文件 |
 
 - skill 里只写**模型系列名，不写版本号**，升级模型不会让施工卡住，见 `references/model-roles.md`。
-- Codex 若设成完全放开权限，不会替你拦危险操作，所以“哪些操作必须先问你”“凭据不交给子 agent”这些规则**写死在流程里**，不依赖工具兜底。
+- Codex 若设成完全放开权限，不会替你拦危险操作；Antigravity 派活用的公共看板所有子 agent 都能看到。所以“哪些操作必须先问你”“凭据不交给子 agent、不写进看板”这些规则**写死在流程里**，不依赖工具兜底。
 - 不支持子 agent 的工具：照常写需求；施工退回“每期单独开窗口”的手动方式。
 
 ## 安装
@@ -128,6 +130,17 @@ mkdir -p .codex/agents && cp ~/.codex/skills/baogongtou/templates/codex-agents/*
 
 角色文件里的 `model` 是占位符：开工时包工头会按系列名（Sol / Astra / Luna）填入当前最新型号并告诉你。没有角色文件时，Codex 子 agent 会继承包工头的最强模型做开发，额度消耗明显变大。
 
+### Antigravity
+
+放到全局配置目录（所有项目通用，无需为每个项目复制角色文件）：
+
+```bash
+git clone https://github.com/yinweb49-sudo/baogongtou.git ~/.gemini/config/skills/baogongtou
+```
+
+> Windows PowerShell：`git clone https://github.com/yinweb49-sudo/baogongtou.git "$env:USERPROFILE\.gemini\config\skills\baogongtou"`
+> 若希望与全局协作规则、关键词唤起钩子打包托管，也可作为个人插件放入 `~/.gemini/config/plugins/<插件名>/`。
+
 ### 关键词强制唤起（推荐，需手动开启）
 
 skill 是否被唤起，由 AI 读 skill 简介后自己判断；装的 skill 多时，Claude Code 还会把简介截短（默认所有简介合计只占上下文约 1%）。所以光靠简介不够稳，尤其是讨论完需求说“就这么定了”时，AI 容易直接按自己的理解写。安装 skill **不会**自动改你的配置，下面这一步要你自己加。
@@ -149,6 +162,22 @@ skill 是否被唤起，由 AI 读 skill 简介后自己判断；装的 skill �
 之后每条消息都会过一遍关键词：命中“写需求、需求文档、PRD、拆期、包工头、全自动模式”等说法，强制 AI 先加载包工头（只是顺口提到“需求文档”这类字眼时，加载后先分诊）；命中“就这么定了、按这个方案来、可以开工”等确认的话，由 AI 先判断是不是小活，小活直接做，不是小活才加载。AI 第一句会告诉你分诊结果，或“已开启包工头模式”。在本仓库里维护 skill 时不会触发。需要本机装有 Node.js。
 
 **Codex**：把 `SKILL.md` 简介里的触发说法写进全局 `~/.codex/AGENTS.md` 作为硬规则（加载 `$baogongtou`、第一句声明已开启包工头模式）。
+
+**Antigravity**：`hooks/baogongtou-trigger.cjs` 已同时兼容 Antigravity 的 `PreInvocation` 协议（带单轮去重）。在全局 `~/.gemini/config/hooks.json` 或个人插件根目录的 `hooks.json` 中加入：
+
+```json
+{
+  "baogongtou-trigger": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node ./skills/baogongtou/hooks/baogongtou-trigger.cjs",
+        "timeout": 10
+      }
+    ]
+  }
+}
+```
 
 ## 使用
 
@@ -235,7 +264,7 @@ baogongtou/
 ├── assets/                               # README 用的动态示意图
 ├── evals/                                # 维护用：回归用例（skill-creator 格式）与维护纪律
 ├── hooks/
-│   └── baogongtou-trigger.cjs            # 【可选】Claude Code 关键词强制唤起
+│   └── baogongtou-trigger.cjs            # 【可选】Claude Code / Antigravity 关键词强制唤起
 ├── references/
 │   ├── raw-requirements-template.md      # 需求证据与原始描述（证据编号 + 决策追踪）
 │   ├── visual-first-workflow.md          # 最小业务草案 → 可交互原型 → 视觉确认门槛
@@ -262,7 +291,7 @@ baogongtou/
 
 - 本仓库由单一维护者维护。用户明确要求“发布 / 同步”时，直接提交并推送到 `main`，不默认建功能分支或 Pull Request。
 - 只有明确要求代码评审、草稿 PR 或隔离开发时，才使用独立分支和 Pull Request。
-- 推送成功后同步本机 Claude Code 与 Codex 的安装目录，保证本地使用版本与 `main` 一致。
+- 推送成功后同步本机 Claude Code、Codex 与 Antigravity 的安装目录，保证本地使用版本与 `main` 一致。
 - skill 内只写模型系列名；工具新增或撤下某个系列时，才更新 `references/model-roles.md` 和上面的适配对象表。
 - 分支保护或权限阻止推送时，停止并说明原因，禁止强推绕过。
 
